@@ -192,7 +192,7 @@ const ConferenceEvent = () => {
           {venueItems.map((item, index) => (
             <div className="venue_main" key={index}>
               <div className="img">
-                <img src={item.img} alt={item.name} />
+                <span className="item_icon" role="img" aria-label={item.name}>{item.icon}</span>
               </div>
               <div className="text">{item.name}</div>
               <div>${item.cost}</div>
@@ -258,7 +258,7 @@ const ConferenceEvent = () => {
                                     {avItems.map((item, index) => (
                                         <div className="av_data venue_main" key={index}>
                                             <div className="img">
-                                                 <img src={item.img} alt={item.name} />
+                                                 <span className="item_icon" role="img" aria-label={item.name}>{item.icon}</span>
                                             </div>
                                         <div className="text"> {item.name} </div>
                                         <div> ${item.cost} </div>
