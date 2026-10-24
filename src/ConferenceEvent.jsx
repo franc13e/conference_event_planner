@@ -8,7 +8,9 @@ import { toggleMealSelection } from "./mealsSlice";
 
 const ConferenceEvent = () => {
     const [showItems, setShowItems] = useState(false);
-    const [numberOfPeople, setNumberOfPeople] = useState(1);
+    // Keep the raw text so the field can be cleared while typing; costs use a safe whole number.
+    const [peopleInput, setPeopleInput] = useState("1");
+    const numberOfPeople = Math.max(0, Number.parseInt(peopleInput, 10) || 0);
     
     //Selectors
     const venueItems = useSelector((state) => state.venue);
@@ -114,8 +116,8 @@ const ConferenceEvent = () => {
                                     : item.quantity}
                                 </td>
                                 <td>{item.type === "meals" || item.numberOfPeople
-                                    ? `${item.cost * numberOfPeople}`
-                                    : `${item.cost * item.quantity}`}
+                                    ? `$${(item.cost * numberOfPeople).toLocaleString()}`
+                                    : `$${(item.cost * item.quantity).toLocaleString()}`}
                                 </td>
                             </tr>
                         ))}
@@ -241,7 +243,7 @@ const ConferenceEvent = () => {
             </div>
           ))}
         </div>
-        <div className="total_cost">Total Cost: ${venueTotalCost}</div>
+        <div className="total_cost">Total Cost: ${venueTotalCost.toLocaleString()}</div>
       </div>
 
                             {/*Necessary Add-ons*/}
@@ -270,7 +272,7 @@ const ConferenceEvent = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <div className="total_cost">Total Cost:{avTotalCost}</div>
+                                <div className="total_cost">Total Cost: ${avTotalCost.toLocaleString()}</div>
 
                             </div>
 
@@ -285,9 +287,10 @@ const ConferenceEvent = () => {
 
                             <div className="input-container venue_selection">
                                 <label htmlFor="numberOfPeople"><h3>Number of People:</h3></label>
-                                <input type="number" className="input_box5" id="numberOfPeople" value={numberOfPeople}
-                                    onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-                                    min="1"
+                                <input type="number" className="input_box5" id="numberOfPeople" value={peopleInput}
+                                    onChange={(e) => setPeopleInput(e.target.value)}
+                                    onBlur={() => setPeopleInput(String(Math.max(1, numberOfPeople)))}
+                                    min="1" step="1" inputMode="numeric"
                                 />
                             </div>
                                 <div className="meal_selection">
@@ -304,7 +307,7 @@ const ConferenceEvent = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <div className="total_cost">Total Cost:  {mealsTotalCost}</div>
+                                <div className="total_cost">Total Cost: ${mealsTotalCost.toLocaleString()}</div>
 
 
                             </div>

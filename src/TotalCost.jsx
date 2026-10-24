@@ -12,7 +12,7 @@ const TotalCost = ({ totalCosts, ItemsDisplay }) => {
         </div>
        <div>
             <h2 id="pre_fee_cost_display" className="price">
-                ${total_amount}
+                ${total_amount.toLocaleString()}
             </h2>
             <div className="render_items">
                 <ItemsDisplay />
