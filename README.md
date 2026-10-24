@@ -6,6 +6,12 @@ A React + Redux Toolkit app for planning a conference event. Choose venue rooms,
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/landing.png" width="720" alt="Conference Expense Planner landing page">
+</p>
+
 ## Features
 
 - **Venue selection**: pick from rooms ranging from small meeting rooms (5 people) to an auditorium hall (200 people)
